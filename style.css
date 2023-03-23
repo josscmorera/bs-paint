@@ -62,21 +62,47 @@
 }
 
 .color-1 {
+  background-color: red;
 
 }
 
 .color-2 {
+  background-color: blue;
 
 }
 
 .color-3 {
+  background-color: green;
 
 }
 
 .color-4 {
+  background-color: yellow;
 
 }
 
 .color-5 {
+  background-color: white;
 
+}
+
+body {
+  /* default styles for light mode */
+  background-color: #ffffff;
+  color: #333333;
+}
+
+body.dark {
+  /* styles for dark mode */
+  background-color: #202124;
+  color: #ffffff;
+}
+
+/* additional styles for dark mode */
+.palette-color {
+  color: #ffffff;
+}
+
+.square {
+  border-color: #ffffff;
 }

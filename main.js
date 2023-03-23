@@ -50,6 +50,12 @@ while (count <= gridWidth * gridWidth) {
 // (Note the singular or plural used in that sentence!)
 
 
+let squares = document.querySelectorAll('.square');
+let paletteColors = document.querySelectorAll('.palette-color');
+let brush = document.querySelector('.current-brush');
+let isMouseDown = false;
+let darkMode = document.querySelector('#toggle-dark-mode');
+
 
 /****************************
  * EVENT LISTENER FUNCTIONS *
@@ -61,6 +67,36 @@ while (count <= gridWidth * gridWidth) {
 // run as event listeners (after the next step is set up) isn't a
 // bad idea for testing purposes.
 
+darkMode.addEventListener('click', function () {
+  document.body.classList.toggle('dark');
+});
+
+for (let i = 0; i < paletteColors.length; i++) {
+  paletteColors[i].addEventListener('click', function () {
+    let selectedColor = paletteColors[i].classList[1];
+    let currentBrushColor = brush.classList[1];
+    brush.classList.replace(currentBrushColor, selectedColor);
+  });
+}
+
+for (let i = 0; i < squares.length; i++) {
+  squares[i].addEventListener('click', function () {
+    if (squares[i].classList.contains('square')) {
+      isMouseDown = false;
+      let currentBrushColor = brush.classList[1];
+      let currentSquareColor = squares[i].classList[1];
+      squares[i].classList.replace(currentSquareColor, currentBrushColor);
+    }
+  });
+
+  squares[i].addEventListener('mouseenter', function () {
+    if (isMouseDown && squares[i].classList.contains('square')) {
+      let currentBrushColor = brush.classList[1];
+      let currentSquareColor = squares[i].classList[1];
+      squares[i].classList.replace(currentSquareColor, currentBrushColor);
+    }
+  });
+}
 
 
 /**************************
@@ -71,3 +107,13 @@ while (count <= gridWidth * gridWidth) {
 // You'll need to add the appropriate event listener for each
 // square and for each palette color from the functions you
 // wrote above.
+
+document.addEventListener('mousedown', function () {
+  console.log('mouse down')
+  isMouseDown = true;
+});
+
+document.addEventListener('mouseup', function () {
+  console.log('mouse up')
+  isMouseDown = false;
+});
